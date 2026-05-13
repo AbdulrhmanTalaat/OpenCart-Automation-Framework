@@ -1,0 +1,5 @@
+testName,email,password,expected
+Valid login-No.1,abdulrhm3n@gmail.com,Test@123,success
+Valid login-No.2,QC1@test.com,admin@123,success
+Invalid login-No.1,abdulrhm3n@gmail.com,Test@123456,failure
+Invalid login-No.2,QC1@test.com,,failure

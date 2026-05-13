@@ -1,0 +1,238 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: CheckOut.spec.ts >> CheckOut Page @master @regression
+- Location: tests\CheckOut.spec.ts:36:5
+
+# Error details
+
+```
+Error: locator.selectOption: Error: strict mode violation: locator('#input-payment-country option') resolved to 254 elements:
+    1) <option value=""> --- Please Select --- </option> aka getByLabel('Country')
+    2) <option value="244">Aaland Islands</option> aka getByLabel('Country')
+    3) <option value="1">Afghanistan</option> aka getByLabel('Country')
+    4) <option value="2">Albania</option> aka getByLabel('Country')
+    5) <option value="3">Algeria</option> aka getByLabel('Country')
+    6) <option value="4">American Samoa</option> aka getByLabel('Country')
+    7) <option value="5">Andorra</option> aka getByLabel('Country')
+    8) <option value="6">Angola</option> aka getByLabel('Country')
+    9) <option value="7">Anguilla</option> aka getByLabel('Country')
+    10) <option value="8">Antarctica</option> aka getByLabel('Country')
+    ...
+
+Call log:
+  - waiting for locator('#input-payment-country option')
+
+```
+
+# Test source
+
+```ts
+  85  | 
+  86  | 
+  87  |     /**
+  88  |          * Check CheckOut Page Is Visible Or Not.
+  89  |          * @returns Promise<Boolean> Should return True.
+  90  |          */
+  91  |     async checkOutPageIsVisible(): Promise<boolean> {
+  92  | 
+  93  |         const header = await this.headerTitle.textContent();
+  94  |         return header?.includes('Checkout') ?? false;
+  95  |     }
+  96  | 
+  97  | 
+  98  | 
+  99  | 
+  100 |     /**
+  101 |          * This Method For select Checkout Options:.
+  102 |          * Register Account Or Guest Checkout.
+  103 |          * @returns select one Radio Button.
+  104 |          */
+  105 |     /* async chooseCheckoutOption(selectCheckoutOptions: string): Promise<void> {
+  106 |         const options = await this.CheckoutOptions.all();
+  107 | 
+  108 |         for (const option of options) {
+  109 |             const text = await option.textContent();
+  110 | 
+  111 |             if (text?.toLocaleLowerCase() === selectCheckoutOptions) {
+  112 |                 await option.click();
+  113 |                 break;
+  114 |             }
+  115 |         }
+  116 |     } */
+  117 | 
+  118 |      // Choose checkout option
+  119 |      async chooseCheckoutOption(checkOutOption: string){
+  120 |         if (checkOutOption === "Guest Checkout") {
+  121 |             await this.CheckoutOptions.click();
+  122 |         }
+  123 |     }
+  124 | 
+  125 | 
+  126 |     /**
+  127 |      * This Method For Complete First Step.
+  128 |      * @param btnFirstContinue - Click on Continue Button.
+  129 |      * @returns Step 2: Billing Details.
+  130 |      */
+  131 |     async clickOnContinueButtonCheckoutOptions(): Promise<void> {
+  132 |         await this.btnFirstContinue.click();
+  133 | 
+  134 |     }
+  135 | 
+  136 |     /**
+  137 |  * Verify that the Title Section Billing Details is Visible.
+  138 |  * @returns True if Step 2: Billing Details is Appear Correctly.
+  139 |  */
+  140 | 
+  141 | async verifyTitleBillingDetailsIsVisible () : Promise<boolean>
+  142 | {
+  143 |      const shippingmethod = await  this.titleBillingDetails.textContent();
+  144 |      return shippingmethod?.includes("Step 2: Billing Details ") ?? false;
+  145 | }
+  146 | 
+  147 | /**
+  148 |  * This Method fills customer billing details.
+  149 |  * in Checkout Step 2: Billing Details.
+  150 |  * Fill FirstName , LastName , Email , Telephone.
+  151 |  * @param firstName - Customer first name.
+  152 |  * @param lastName - Customer last name.
+  153 |  * @param email - Customer email address.
+  154 |  * @param telephone - Customer phone number.
+  155 |  */
+  156 | async fillYourPersonalDetails(FillFirstName : string, FilllastName : string , FillEmail : string , FillTelephone : string): Promise<void> {
+  157 |     await this.txtFirstName.fill(FillFirstName);
+  158 |     await this.txtLastName.fill(FilllastName);
+  159 |     await this.email.fill(FillEmail);
+  160 |     await this.telephone.fill(FillTelephone);
+  161 | }
+  162 | 
+  163 | /**
+  164 |  * This Method fills customer Address details.
+  165 |  * in Checkout Step 2: Billing Details.
+  166 |  * Fill Address1 , City , PostCode.
+  167 |  * @param address - Customer address.
+  168 |  * @param city - Customer city.
+  169 |  * @param postCode - Customer postal code.
+  170 |  */
+  171 | async fillYourAddress(FillAddress1 : string, FillCity : string , FillPostCode : string): Promise<void> {
+  172 |     await this.txtAddress1.fill(FillAddress1);
+  173 |     await this.txtCity.fill(FillCity);
+  174 |     await this.Post_Code.fill(FillPostCode);
+  175 | }
+  176 | 
+  177 | /**
+  178 |  * This Method fills customer Address details.
+  179 |  * Select country and state/region from dropdown lists.
+  180 |  * @param country - Country name.
+  181 |  * @param state - State or region name.
+  182 |  * @returns Select billing address location.
+  183 |  */
+  184 | async setCountry(country: string , state : string){
+> 185 |     await this.drpCountry.selectOption(country)
+      |                           ^ Error: locator.selectOption: Error: strict mode violation: locator('#input-payment-country option') resolved to 254 elements:
+  186 |     await this.drpState.selectOption({ label: state });
+  187 | }
+  188 | 
+  189 | /**
+  190 |      * This Method For Complete Step 2: Billing Details 
+  191 |      * @param btnContinueBillingPersonalDetails - Click on Continue Button
+  192 |      * @returns Step 4: Delivery Details
+  193 |      */
+  194 | async clickOnbtnContinueBillingPersonalDetails(): Promise<void> {
+  195 |     await this.btnContinueBillingPersonalDetails.click();
+  196 | }
+  197 | 
+  198 | /**
+  199 |  * Verify that the Flat Rate shipping option is selected By Default.
+  200 |  * @returns True if Flat Rate radio button is checked.
+  201 |  */
+  202 | 
+  203 | async verifyFlatRateisCheced() : Promise<boolean>
+  204 | {
+  205 |      await  this.flat_Rate.isChecked()
+  206 |      return true;
+  207 | }
+  208 | 
+  209 | /**
+  210 |  * Verify that the Delivery Details is Visible
+  211 |  *
+  212 |  * @returns True if Message shippingmethod Appear Correctly
+  213 |  */
+  214 | 
+  215 | async verifyMsshippingmethodIsVisible() : Promise<boolean>
+  216 | {
+  217 |      const shippingmethod = await this.textTitlebuttonShipping.textContent();
+  218 |      return shippingmethod?.includes("Please select the preferred shipping method to use on this order.") ?? false;
+  219 | }
+  220 | 
+  221 | 
+  222 |  /**
+  223 |      * This Method For Complete Step 4: Delivery Method .
+  224 |      * Continue Button.
+  225 |      * @returns Step 5: Payment Method .
+  226 |      */
+  227 |  async clickOnContinueButtonshipping_method(): Promise<void> {
+  228 |     await this.btnContinueshipping_method.click();
+  229 | }
+  230 | 
+  231 | /**
+  232 |  * Verify that the "Cash On Delivery" option is selected By Default.
+  233 |  * @returns True if Flat Rate radio button is checked.
+  234 |  */
+  235 | 
+  236 | async verifyCashOnDeliveryisCheced() : Promise<boolean>
+  237 | {
+  238 |      await  this.codPaymentMethod.isChecked()
+  239 |      return true;
+  240 | }
+  241 | 
+  242 | /**
+  243 |  * This Method Select Terms & Conditions .
+  244 |  * @param termsCondtion - click to Select.
+  245 |  */
+  246 | async selectTermsandCondtions() : Promise<void>{
+  247 |     await this.termsCondtion.check()
+  248 | 
+  249 | }
+  250 | 
+  251 | 
+  252 | /**
+  253 |      * This Method For Complete Step 5: Payment Method.
+  254 |      * Continue Button.
+  255 |      * @returns Step 6: Confirm Order .
+  256 |      */
+  257 | async clickOnContinueButtonPayment_method(): Promise<void> {
+  258 |     await this.btnContinuepayment_method.click();
+  259 | }
+  260 | 
+  261 | 
+  262 | /**
+  263 |  * Verify that the Total Price Appear Correct in Step 6: Confirm Order.
+  264 |  * @returns True if Total Price Correct
+  265 |  */
+  266 | 
+  267 | async verifyTotalprice(totalPrice : string) : Promise<boolean>
+  268 | {
+  269 |      const price = await this.totalPrice.textContent();
+  270 |      return price?.includes(totalPrice) ?? false;
+  271 | }
+  272 | 
+  273 | 
+  274 | /**
+  275 |      * This Method For Complete Step 6: Confirm Order.
+  276 |      * Continue Button.
+  277 |      * @returns 
+  278 |      */
+  279 | async clickOnContinueButtonConfirmationOrder(): Promise<void> {
+  280 |     await this.confirmorderButton.click();
+  281 | }
+  282 | 
+  283 | 
+  284 | 
+  285 | async verifyTotalPriceAuto(totalPrice : string): Promise<void> {
+```

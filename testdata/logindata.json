@@ -1,0 +1,26 @@
+[
+  {
+    "testName": "Valid login-No.1",
+    "email": "abdulrhm3n@gmail.com",
+    "password": "Test@123",
+    "expected": "success"
+  },
+  {
+    "testName": "Valid login-No.2",
+    "email": "QC1@test.com",
+    "password": "admin@123",
+    "expected": "success"
+  },
+  {
+    "testName": "Invalid login-No.1",
+    "email": "abdulrhm3n@gmail.com",
+    "password": "Test@123456",
+    "expected": "failure"
+  },
+  {
+    "testName": "Invalid login-No.2",
+    "email": "QC1@test.com",
+    "password": "",
+    "expected": "failure"
+  }
+] 
