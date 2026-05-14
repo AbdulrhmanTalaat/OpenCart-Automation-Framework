@@ -105,7 +105,7 @@ project-root/
 
 Before running this project, make sure you have the following installed:
 
-* Node.js (LTS recommended)
+* Node.js
 * npm (comes with Node.js)
 * Git
 
@@ -248,7 +248,6 @@ Running 12 tests using 1 worker
 ## Abdulrhman Talaat
 
 ### LinkedIn
-
-[LinkedIn Profile](www.linkedin.com/in/abdulrhman-talaat-68b910238)
+[LinkedIn Profile](https://www.linkedin.com/in/abdulrhman-talaat-68b910238)
 
 ---
