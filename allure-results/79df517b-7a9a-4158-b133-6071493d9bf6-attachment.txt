@@ -1,0 +1,11 @@
+✅ Registration is completed!
+✅ Logout is completed!
+✅ Login is completed!
+✅ Product added to cart!
+✅ Shopping cart completed!
+Total Price In Step 6: Confirm Order  is : $1,505.00
+Subtotal in Checkout Page: 1500
+Shipping in Checkout Page : 5
+Expected Total in Checkout Page : 1505
+Actual Total in Checkout Page: 1505
+✅ Check Out  completed!

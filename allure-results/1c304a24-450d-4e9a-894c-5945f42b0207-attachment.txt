@@ -1,3 +1,0 @@
-Page is Visibale : true
-Email = Salvatore41@gmail.com
-password = CXllJZHWUw

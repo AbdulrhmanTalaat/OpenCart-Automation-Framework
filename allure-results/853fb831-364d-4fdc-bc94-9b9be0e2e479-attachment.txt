@@ -1,3 +1,0 @@
-Confirmation Ms after Add Product in Cart is Appear : true
-Total Price For Products is :  $602.00
-page CheckOut is Visible :  true

@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","8524","Shopping Page @master @regression","chromium","2026-05-07","passed","2026-05-07","","ShoppingCart.spec.ts","",""
+"","9433","End To End Senario","chromium","2026-05-14","passed","2026-05-14","","EndToEndTest.spec.ts","",""
