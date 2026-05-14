@@ -88,12 +88,13 @@ project-root/
 │
 ├── pages/                # Page Object classes
 ├── tests/                # Test files
-├── testdata/             # Test data files
+├── testdata/             # Test data files (Json - CSV)
 ├── utils/                # Helper & utility methods
 ├── test-results/         # Test execution results
-├── playwright-report/    # HTML reports
+├── playwright-report/    # Generated Test Reports
+├── test.config.ts        # Test configuration values
 ├── package.json
-└── playwright.config.ts
+└── playwright.config.ts  # playwright Main Configuration
 ```
 
 ---
